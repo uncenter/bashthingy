@@ -8,7 +8,9 @@ QUESTION=$(sed -n "$(($QUESTION_INDEX+1))p" pages/questions.txt)
 
 if [[ "$REQUEST_METHOD" == "POST" ]]; then
   debug "User answered ${QUERY_PARAMS[answer]}!"
-  QUESTION_INDEX=$(( COUNT + 1 ))
+  [ ! -d "data/answers/" ] && mkdir data/answers/
+  echo "${QUERY_PARAMS[answer]}" > "data/answers/${QUERY_PARAMS[question]}"
+  QUESTION_INDEX=$(( QUESTION_INDEX + 1 ))
   echo "$QUESTION_INDEX" > data/question_index
 fi
 
