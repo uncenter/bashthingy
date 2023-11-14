@@ -4,7 +4,6 @@ if [[ ! -f data/question_index ]]; then
 fi
 
 QUESTION_INDEX=$(cat data/question_index)
-QUESTION=$(sed -n "$(($QUESTION_INDEX+1))p" pages/questions.txt)
 
 if [[ "$REQUEST_METHOD" == "POST" ]]; then
   debug "User answered ${QUERY_PARAMS[answer]}!"
@@ -13,6 +12,8 @@ if [[ "$REQUEST_METHOD" == "POST" ]]; then
   QUESTION_INDEX=$(( QUESTION_INDEX + 1 ))
   echo "$QUESTION_INDEX" > data/question_index
 fi
+
+QUESTION=$(sed -n "$(($QUESTION_INDEX+1))p" pages/questions.txt)
 
 old_IFS=$IFS
 IFS=','
