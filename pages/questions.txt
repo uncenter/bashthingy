@@ -1,0 +1,3 @@
+Are you a cat or a dog person?,cat,dog
+Which topping do you like on pizza?,pepperoni,pineapple
+Red or green?,red,green

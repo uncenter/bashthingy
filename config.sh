@@ -1,0 +1,2 @@
+PROJECT_NAME=bashthingy
+HIDE_LOGO=1
