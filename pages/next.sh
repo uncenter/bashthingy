@@ -24,10 +24,18 @@ QUESTION_PROMPT=${QUESTION_PARTS[0]}
 QUESTION_ANSWER_A=${QUESTION_PARTS[1]}
 QUESTION_ANSWER_B=${QUESTION_PARTS[2]}
 
-htmx_page << EOF
+if [[ "$QUESTION_INDEX" == $(wc -l pages/questions.txt | grep -o '[0-9]\+') ]]; then
+  htmx_page << EOF
+<div>
+  <p>No more questions!</p>
+</div>
+EOF
+else
+  htmx_page << EOF
 <div id="question">
   <p>$QUESTION_PROMPT</p>
   <button hx-post="/next?question=$QUESTION_INDEX&answer=$QUESTION_ANSWER_A" hx-swap="outerHTML" hx-target="#question">$QUESTION_ANSWER_A</button>
   <button hx-post="/next?question=$QUESTION_INDEX&answer=$QUESTION_ANSWER_B" hx-swap="outerHTML" hx-target="#question">$QUESTION_ANSWER_B</button>
 </div>
 EOF
+fi
